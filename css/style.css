@@ -16,3 +16,37 @@
     display: inline-block;
 
 }
+
+.color-pegs {
+    border-radius: 50%;
+}
+
+#greenBtn {
+    color: green;
+    background-color: green;
+}
+
+#redBtn {
+    color: red;
+    background-color: red;
+}
+
+#blueBtn {
+    color: blue;
+    background-color: blue;
+}
+
+#brownBtn {
+    color: brown;
+    background: brown;
+}
+
+#orangeBtn {
+    color: orange;
+    background-color: orange;
+}
+
+#yellowBtn {
+    color: yellow;
+    background-color: yellow;
+}
