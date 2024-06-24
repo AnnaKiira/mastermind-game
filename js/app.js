@@ -8,7 +8,7 @@ const colorOptions = ['green', 'red', 'blue', 'brown', 'orange', 'yellow']; /* T
 /*-------------------------------- Variables (state) --------------------------------*/
 let hiddenColors = []; /* This empty array will store my chosen colors I defined in my const colors array */
 let attempts; 8
-let gameResult; 
+let gameResult;
 let display = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']; 
 
 
@@ -42,7 +42,7 @@ for (let i = 0; i < totalSquareCount; i++) {
 /*-------------------------------- Functions --------------------------------*/
 function init () {
     hiddenColors = colorReveal();
-    /* render(); */
+    render();
 
 }
 
@@ -70,6 +70,22 @@ function colorReveal () {
 function guess (evt) { /* this is an event that checks if the guess if matching the hiddenColors */
     return evt.length === hiddenColors.length && evt.every((colorPeg, index) => colorPeg === hiddenColors[index]); /* using array every method to check if every guess (the event that is happening) is the same length as the hiddenColors (4 guesses and 4 generated colors) and that they're at the same index*/
 }
+
+function updateDisplay () {
+    display.forEach((sqr, index) => {
+        if (sqr === '#greenBtn') {
+            squareElements[index].textContent = 
+        }
+    
+    });
+};
+
+/* function handleClick (evt) {
+    const squareIndex = evt.target.id;
+    if (display[squareIndex] === '#greenBtn' && display[squareIndex] === '#redBtn' && display[squareIndex] === '#blueBtn' && display[squareIndex] === '#brownBtn' && display[squareIndex] === '#orangeBtn' && display[squareIndex] === '#yellowBtn' &&) {
+
+    }
+} */
 
 /*----------------------------- Event Listeners -----------------------------*/
 resetBtn.addEventListener('click', init)
