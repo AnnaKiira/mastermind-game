@@ -2,13 +2,13 @@
 const height = 8
 const width = 9
 const totalSquareCount = width * height
-const colors = ['green', 'red', 'blue', 'brown', 'orange', 'yellow']; /* These are my chosen colors that are hidden and has to be guessed */ 
+const colorOptions = ['green', 'red', 'blue', 'brown', 'orange', 'yellow']; /* These are my chosen colors that are hidden and has to be guessed */ 
 
 
 /*-------------------------------- Variables (state) --------------------------------*/
 let hiddenColors = []; /* This empty array will store my chosen colors I defined in my const colors array */
-let result; 
-let winner; 
+let attempts; 8
+let gameResult; 
 let display = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']; 
 
 
@@ -61,12 +61,15 @@ function updateResult () {
 function colorReveal () {
     let hidden = []; /* this will initialize my empty array that will keep my generated colors once they're generated  */
     for (let i = 0; i < 4; i++) { /* Choosing a for loop that runs 4 times (the amount of hidden pegs) */
-        let randomColor = colors[Math.floor(Math.random() * colors.length)]; /* using Math.floor and math.random methods to select random colors from my colors array */
+        let randomColor = colorOptions[Math.floor(Math.random() * colorOptions.length)]; /* using Math.floor and math.random methods to select random colors from my colors array */
         hidden.push(randomColor); /* this pushes the random selected color to the empty hidden array */
     }
     return hidden; /* this is returning the hidden array now with the generated colors */
 }
 
+function guess (evt) { /* this is an event that checks if the guess if matching the hiddenColors */
+    return evt.length === hiddenColors.length && evt.every((colorPeg, index) => colorPeg === hiddenColors[index]); /* using array every method to check if every guess (the event that is happening) is the same length as the hiddenColors (4 guesses and 4 generated colors) and that they're at the same index*/
+}
 
 /*----------------------------- Event Listeners -----------------------------*/
 resetBtn.addEventListener('click', init)
