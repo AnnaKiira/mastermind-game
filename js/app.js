@@ -1,15 +1,14 @@
 /*-------------------------------- Constants --------------------------------*/
-const height = 8
-const width = 9
-const totalSquareCount = width * height
-const colorOptions = ['green', 'red', 'blue', 'brown', 'orange', 'yellow']; /* These are my chosen colors that are hidden and has to be guessed */ 
+const height = 8;
+const width = 9;
+const totalSquareCount = width * height;
+const colorOptions = ['green', 'red', 'blue', 'brown', 'orange', 'yellow']; /* These are my chosen colors that are hidden and has to be guessed */
 
 
 /*-------------------------------- Variables (state) --------------------------------*/
-let hiddenColors = []; /* This empty array will store my chosen colors I defined in my const colors array */
-let attempts; 8
-let gameResult;
-let display = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']; 
+let hiddenColors; /* the array of generated colors */
+let playerAttempts; /* this starts at 0 since player hasn't used any attempts when starting game */
+let playerGuess; /* the array of the players guesses */
 
 
 /*------------------------ Cached Element References ------------------------*/
@@ -22,7 +21,7 @@ const undoBtn = document.querySelector('#undo-button')
 const resetBtn = document.querySelector('#reset-button')
 /* console.log(undoBtn)
 console.log(resetBtn) */
-const colorPegsBtn = document.querySelectorAll('.color-pegs')
+const colorPegsBtn = document.querySelectorAll('.color-peg')
 
 /*------------------------ Grid Creation ------------------------*/
 
@@ -42,17 +41,18 @@ for (let i = 0; i < totalSquareCount; i++) {
 /*-------------------------------- Functions --------------------------------*/
 function init () {
     hiddenColors = colorReveal();
+    playerAttempts = 0;
+    playerGuess = [];
     render();
 
 }
 
 
 function render () {
+
 }
 
-function gridNumber() {
-    let display = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']; 
-}
+
 
 function updateResult () {
 
@@ -67,35 +67,36 @@ function colorReveal () {
     return hidden; /* this is returning the hidden array now with the generated colors */
 }
 
-function guess (evt) { /* this is an event that checks if the guess if matching the hiddenColors */
-    return evt.length === hiddenColors.length && evt.every((colorPeg, index) => colorPeg === hiddenColors[index]); /* using array every method to check if every guess (the event that is happening) is the same length as the hiddenColors (4 guesses and 4 generated colors) and that they're at the same index*/
+function checkPlayerGuess () {
+    return playerGuess.every((color, index) => color === hiddenColors[index]); /* using array every method to check if playerGuess chose the same color pegs as the hiddenColors have generated (both the color and at the same index in the array) */
 }
 
 function updateDisplay () {
-    display.forEach((sqr, index) => {
-        if (sqr === '#greenBtn') {
-            squareElements[index].textContent = 
-        }
-    
-    });
-};
 
-/* function handleClick (evt) {
-    const squareIndex = evt.target.id;
-    if (display[squareIndex] === '#greenBtn' && display[squareIndex] === '#redBtn' && display[squareIndex] === '#blueBtn' && display[squareIndex] === '#brownBtn' && display[squareIndex] === '#orangeBtn' && display[squareIndex] === '#yellowBtn' &&) {
-
-    }
-} */
+}
 
 /*----------------------------- Event Listeners -----------------------------*/
 resetBtn.addEventListener('click', init)
+
 undoBtn.addEventListener('click', init)
-/* colorPegsBtn.addEventListener('click', init) */
+
+colorPegsBtn.forEach(button => {
+    button.addEventListener('click', () => {
+        const color = button.dataset.color; /* this part is defining the actual color from my data-color in html and CSS, without it my event listener wont work */
+        if (playerGuess.length < width) {
+            playerGuess.push(color);
+            /* console.log(playerGuess); */
+            updateDisplay();
+        }
+    });
+});
 
 
-/*----------------------------- Event Listeners -----------------------------*/
+/*----------------------------- Calling the functions -----------------------------*/
 init();
-/* console.log(hiddenColors); */
+console.log(hiddenColors);
 render ();
 updateResult();
 colorReveal();
+checkPlayerGuess();
+updateDisplay();

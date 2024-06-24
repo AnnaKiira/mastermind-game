@@ -21,32 +21,26 @@
     border-radius: 50%;
 }
 
-#greenBtn {
-    color: green;
+.color-peg[data-color="green"] {
     background-color: green;
 }
 
-#redBtn {
-    color: red;
+.color-peg[data-color="red"] {
     background-color: red;
 }
 
-#blueBtn {
-    color: blue;
+.color-peg[data-color="blue"] {
     background-color: blue;
 }
 
-#brownBtn {
-    color: brown;
-    background: brown;
+.color-peg[data-color="brown"] {
+    background-color: brown;
 }
 
-#orangeBtn {
-    color: orange;
+.color-peg[data-color="orange"] {
     background-color: orange;
 }
 
-#yellowBtn {
-    color: yellow;
+.color-peg[data-color="yellow"] {
     background-color: yellow;
 }
