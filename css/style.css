@@ -11,10 +11,15 @@
     width: 400px;
 }
 
-.grid div {
+.grid > div > div {
     border: 1px solid lightgrey;
     display: inline-block;
+    width: calc(100% / 9)
+}
 
+.row {
+    display: flex;
+    height: calc(100% / 8);
 }
 
 .color-pegs {
@@ -43,4 +48,12 @@
 
 .color-peg[data-color="yellow"] {
     background-color: yellow;
+}
+
+.row[data-index="0"] {
+    
+}
+
+.sqr[data-index="5"] {
+    
 }
