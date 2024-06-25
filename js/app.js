@@ -1,6 +1,6 @@
 /*-------------------------------- Constants --------------------------------*/
 const rows = 8;
-const columns = 9;
+const columns = 9; /* Maybe add two columns consts for feedbackPegs and may need a second one for static guess row */
 const totalSquareCount = columns * rows;
 const colorOptions = ['green', 'red', 'blue', 'brown', 'orange', 'yellow']; /* These are my chosen colors that are hidden and has to be guessed */
 const maximumAttempts = 8;
@@ -10,7 +10,9 @@ const maximumAttempts = 8;
 let hiddenColors; /* the array of generated colors */
 let playerAttempts; /* this starts at 0 since player hasn't used any attempts when starting game */
 let playerGuess; /* the array of the players guesses */
-let targetCell; 
+let targetCell;
+let currentRow;
+/* let feedbackCell; */
 
 
 /*------------------------ Cached Element References ------------------------*/
@@ -47,14 +49,17 @@ function init() {
     hiddenColors = colorReveal();
     playerAttempts = 0;
     playerGuess = [];
-    targetCell = 5;
+    targetCell = 0;
+    currentRow = 0;
+    /* feedbackCell = 5; */
     render();
 
 };
 
 
 function render() {
-
+    updateDisplay();
+    updateResult();
 }
 
 
@@ -69,36 +74,74 @@ function colorReveal() {
 }
 
 function checkPlayerGuess() {
-    return playerGuess.every((color, index) => color === hiddenColors[index]); /* using array every method to check if playerGuess chose the same color pegs as the hiddenColors have generated (both the color and at the same index in the array) */
-}
-
-function updateDisplay() {
-
+    if (playerGuess.every((color, index) => color === hiddenColors[index])) ; /* using array every method to check if playerGuess chose the same color pegs as the hiddenColors have generated (both the color and at the same index in the array) */
 }
 
 function updateResult() {
-    if (checkPlayerGuess()) {
+    if (playerGuess == hiddenColors) {
         displayResult.innerText = 'Congratulations, you won!';
+        return;
     } else if (playerAttempts >= maximumAttempts) {
         displayResult.innerText = `Game over! The correct color pegs was ${hiddenColors}`;
+        return;
     }
 }
 
-function handleClick(evt) {
+/* might need reset function called on reset button click? Currently render/display and hiddenColors doesn´t reset with init being called on reset button click
 
+function resetGame() {
+    playerAttempts = 0;
+    playerGuess = [];
+    targetCell = 0;
+    currentRow = 0;
+    updateDisplay();
+    updateResult();
+    hiddenColors = colorReveal();
+
+} */
+
+/*  For EACH player guess, check color and index = black & just color = white. How to update display only after guess?
+function feedbackPegs() {
+    if (playerGuess.every((color, index) => color === hiddenColors[index])) ;
+} */
+
+function updateDisplay() {
+    for (let i = 0; i < playerGuess.length; i++) {
+        const color = playerGuess[i];
+        const currentColumn = targetCell + i;
+        const square = document.querySelector(`.row[data-row="${currentRow}"] .sqr[data-column="${currentColumn}"]`);
+        if (square) {
+            square.style.backgroundColor = color;
+        }
+        /* if (resetGame()) {
+            square.style.backgroundColor = [data-color, "white"] -------Need to figure out how to reset color-----
+        } */
+        
+    }
+
+    if (playerGuess.length === 4) {
+        playerAttempts++;
+        currentRow++;
+        playerGuess = [];
+    }
 }
+
 
 /*----------------------------- Event Listeners -----------------------------*/
 resetBtn.addEventListener('click', init);
 
 undoBtn.addEventListener('click', () => {
-    /* use if else with */
+    if (playerGuess.length > 0) {
+        playerGuess.pop();
+        targetCell++;
+        updateDisplay();
+    }
 });
 
 colorPegsBtn.forEach(button => {
     button.addEventListener('click', () => {
         const color = button.dataset.color; /* this part is defining the actual color from my data-color in html and CSS, without it my event listener wont work */
-        if (playerGuess.length < width) {
+        if (playerGuess.length < 4) {
             playerGuess.push(color);
             console.log(playerGuess);
             updateDisplay();
@@ -109,9 +152,10 @@ colorPegsBtn.forEach(button => {
 
 /*----------------------------- Calling the functions -----------------------------*/
 init();
-/* console.log(hiddenColors); */
-render();
+console.log(hiddenColors);
+/* render();
 updateResult();
 colorReveal();
 checkPlayerGuess();
-updateDisplay();
+updateDisplay(); */
+/* feedbackPegs(); */

@@ -9,6 +9,7 @@
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
     height: 530px;
     width: 400px;
+    margin-top: -300px;
 }
 
 .grid > div > div {
@@ -24,36 +25,48 @@
 
 .color-pegs {
     border-radius: 50%;
+    margin-top: -300px;
 }
 
 .color-peg[data-color="green"] {
     background-color: green;
+    padding: 20px;
 }
 
 .color-peg[data-color="red"] {
     background-color: red;
+    padding: 20px;
 }
 
 .color-peg[data-color="blue"] {
     background-color: blue;
+    padding: 20px;
 }
 
 .color-peg[data-color="brown"] {
     background-color: brown;
+    padding: 20px;
 }
 
 .color-peg[data-color="orange"] {
     background-color: orange;
+    padding: 20px;
 }
 
 .color-peg[data-color="yellow"] {
     background-color: yellow;
+    padding: 20px;
 }
 
-.row[data-index="0"] {
+.color-peg[data-color="white"] {
+    background-color: white;
+    padding: 20px;
+}
+
+/* .row[data-index="0"] {
     
 }
 
 .sqr[data-index="5"] {
-    
-}
+
+} */
