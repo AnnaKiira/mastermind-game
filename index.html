@@ -9,7 +9,7 @@
 </head>
 <body>
     <h1>Mastermind </h1>
-    <h2 id="display-result">Result</h2>
+    <div id="display-result">Result</div>
     <main class="grid-wrapper">
         <section class="grid"></section>
     </main>
@@ -23,16 +23,18 @@
         <button id="undo-button">Undo</button>
         <button id="reset-button">Reset</button>
     </div>
-    <p>
-        <h3>
-            How to play
-        </h3>
-        The aim when playing Mastermind is to break the code in eight or less guesses. The computer generates a code of random colered pegs, which are hidden behind the white pegs on the top of the display. Be aware, all pegs of the same color is possible, so duplicates are allowed. To start, click on one of the colered pegs at the bottom of the display. The chosen peg is placed on the board, starting at row 1, and from left to right. After each row is complete, the game will provide feedback.
-        <h4>Feedback:</h4>
-        <ul>
-            <li>If the guessed pegs are correct in both color and position, a black peg will be displayed on the board</li>
-            <li>If a guessed peg is correct in just color but wrong position, a white peg will be displayed on the board</li>
-        </ul>
-    </p>
+    <div>
+        <p>
+            <h3>
+                How to play
+            </h3>
+            The aim when playing Mastermind is to break the code in eight or less guesses. The computer generates a code of random colered pegs, which are hidden behind the white pegs on the top of the display. Be aware, all pegs of the same color is possible, so duplicates are allowed. To start, click on one of the colered pegs at the bottom of the display. The chosen peg is placed on the board, starting at row 1, and from left to right. After each row is complete, the game will provide feedback.
+            <h4>Feedback:</h4>
+            <ul>
+                <li>If the guessed pegs are correct in both color and position, a black peg will be displayed on the board</li>
+                <li>If a guessed peg is correct in just color but wrong position, a white peg will be displayed on the board</li>
+            </ul>
+        </p>
+    </div>
 </body>
 </html>

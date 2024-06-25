@@ -3,6 +3,7 @@ const height = 8;
 const width = 9;
 const totalSquareCount = width * height;
 const colorOptions = ['green', 'red', 'blue', 'brown', 'orange', 'yellow']; /* These are my chosen colors that are hidden and has to be guessed */
+const maximumAttempts = 8;
 
 
 /*-------------------------------- Variables (state) --------------------------------*/
@@ -45,7 +46,7 @@ function init () {
     playerGuess = [];
     render();
 
-}
+};
 
 
 function render () {
@@ -53,10 +54,6 @@ function render () {
 }
 
 
-
-function updateResult () {
-
-}
 
 function colorReveal () {
     let hidden = []; /* this will initialize my empty array that will keep my generated colors once they're generated  */
@@ -73,12 +70,26 @@ function checkPlayerGuess () {
 
 function updateDisplay () {
 
+
+    /* console.log('Buttons clicked') */
+}
+
+function updateResult () { 
+    if (checkPlayerGuess()) {
+        displayResult.innerText = 'Congratulations, you won!';
+    } else if (playerAttempts >= maximumAttempts) {
+        displayResult.innerText = `Game over! The correct color pegs was ${hiddenColors}`;
+    } 
+}
+
+function handleClick(evt) {
+
 }
 
 /*----------------------------- Event Listeners -----------------------------*/
-resetBtn.addEventListener('click', init)
+resetBtn.addEventListener('click', init);
 
-undoBtn.addEventListener('click', init)
+undoBtn.addEventListener('click', init);
 
 colorPegsBtn.forEach(button => {
     button.addEventListener('click', () => {
