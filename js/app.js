@@ -127,6 +127,17 @@ function feedbackPegs() {
             if (feedbackCell) {
                 feedbackCell.style.backgroundColor = 'black';
                 feedbackSquare++;
+                if (playerGuess[i] !== hiddenColors[i] && hiddenColors.includes(playerGuess[i])) {
+                    let colorCheck = hiddenColors.findIndex((color, index) => color === playerGuess[i] && playerGuess[index] !== hiddenColors[index]);
+                    if (colorCheck !== -1) {
+                        const feedbackCell = document.querySelector(`.row[data-row="${currentRow}"] .sqr[data-column="${feedbackSquare}"]`);
+                        if (feedbackCell) {
+                            feedbackCell.style.backgroundColor = 'pink';
+                            feedbackSquare++;
+                        }
+
+                    }
+                }
             }
         }
     }

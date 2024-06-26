@@ -3,6 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    /* background-color: pink; */
 }
 
 .grid {
@@ -10,17 +11,19 @@
     height: 530px;
     width: 400px;
     margin-top: -300px;
+    /* color:pink; */
 }
 
 .grid > div > div {
     border: 1px solid lightgrey;
     display: inline-block;
-    width: calc(100% / 9)
+    width: calc(100% / 9);
 }
 
 .row {
     display: flex;
     height: calc(100% / 8);
+    /* color: white; */
 }
 
 .color-pegs {
