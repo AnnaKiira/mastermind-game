@@ -13,6 +13,8 @@ let playerGuess; /* the array of the players guesses */
 let targetCell;
 let currentRow;
 let feedbackSquare;
+let winAudio = new Audio('./audio/Winner.wav');
+let loseAudio = new Audio('./audio/Game over.wav');
 
 
 /*------------------------ Cached Element References ------------------------*/
@@ -86,9 +88,11 @@ function updateDisplay() {
     if (playerGuess.length === 4) {
         if (checkPlayerGuess()) {
             displayResult.innerText = 'Congratulations, you won!';
+            winAudio.play();
             feedbackPegs();
         } else if (playerAttempts >= maximumAttempts) {
             displayResult.innerText = `Game over! The correct color pegs were ${hiddenColors.join(', ')}.`;
+            loseAudio.play();
             feedbackPegs();
         } else {
             feedbackPegs();
@@ -142,6 +146,11 @@ function feedbackPegs() {
         }
     }
 }
+
+/* function playAudio() {
+    const audio = new Audio('Winner.wav');
+    audio.play();
+} */
 
 /*----------------------------- Event Listeners -----------------------------*/
 resetBtn.addEventListener('click', init);
