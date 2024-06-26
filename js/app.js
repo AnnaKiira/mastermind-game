@@ -3,7 +3,7 @@ const rows = 8;
 const columns = 9; /* Maybe add two columns consts for feedbackPegs and may need a second one for static guess row */
 const totalSquareCount = columns * rows;
 const colorOptions = ['green', 'red', 'blue', 'brown', 'orange', 'yellow']; /* These are my chosen colors that are hidden and has to be guessed */
-const maximumAttempts = 8;
+const maximumAttempts = 7;
 
 
 /*-------------------------------- Variables (state) --------------------------------*/
@@ -46,23 +46,24 @@ for (let i = rows -1; i >= 0; i--) {
 
 /*-------------------------------- Functions --------------------------------*/
 function init() {
+    clearDisplay();
     hiddenColors = colorReveal();
     playerAttempts = 0;
     playerGuess = [];
     targetCell = 0;
     currentRow = 0;
     /* feedbackCell = 5; */
-    render();
-
+    updateDisplay();
+    console.log(hiddenColors);
 };
 
+init();
 
-function render() {
+/* 
+function render() { ------- remember to look into render if it is strictly necessary for this game/code
     updateDisplay();
     updateResult();
-}
-
-
+} */
 
 function colorReveal() {
     let hidden = []; /* this will initialize my empty array that will keep my generated colors once they're generated  */
@@ -73,38 +74,6 @@ function colorReveal() {
     return hidden; /* this is returning the hidden array now with the generated colors */
 }
 
-function checkPlayerGuess() {
-    if (playerGuess.every((color, index) => color === hiddenColors[index])) ; /* using array every method to check if playerGuess chose the same color pegs as the hiddenColors have generated (both the color and at the same index in the array) */
-}
-
-function updateResult() {
-    if (playerGuess == hiddenColors) {
-        displayResult.innerText = 'Congratulations, you won!';
-        return;
-    } else if (playerAttempts >= maximumAttempts) {
-        displayResult.innerText = `Game over! The correct color pegs was ${hiddenColors}`;
-        return;
-    }
-}
-
-/* might need reset function called on reset button click? Currently render/display and hiddenColors doesn´t reset with init being called on reset button click
-
-function resetGame() {
-    playerAttempts = 0;
-    playerGuess = [];
-    targetCell = 0;
-    currentRow = 0;
-    updateDisplay();
-    updateResult();
-    hiddenColors = colorReveal();
-
-} */
-
-/*  For EACH player guess, check color and index = black & just color = white. How to update display only after guess?
-function feedbackPegs() {
-    if (playerGuess.every((color, index) => color === hiddenColors[index])) ;
-} */
-
 function updateDisplay() {
     for (let i = 0; i < playerGuess.length; i++) {
         const color = playerGuess[i];
@@ -113,30 +82,61 @@ function updateDisplay() {
         if (square) {
             square.style.backgroundColor = color;
         }
-        /* if (resetGame()) {
-            square.style.backgroundColor = [data-color, "white"] -------Need to figure out how to reset color-----
-        } */
-        
     }
-
     if (playerGuess.length === 4) {
-        playerAttempts++;
-        currentRow++;
-        playerGuess = [];
+        if (checkPlayerGuess()) {
+            displayResult.innerText = 'Congratulations, you won!';
+        } else if (playerAttempts >= maximumAttempts) {
+            displayResult.innerText = `Game over! The correct color pegs were ${hiddenColors.join(', ')}.`;
+        } else {
+            playerAttempts++;
+            currentRow++;
+            playerGuess = [];
+        }
     }
 }
+
+function checkPlayerGuess() {
+    return playerGuess.every((color, index) => color === hiddenColors[index]); /* using array every method to check if playerGuess chose the same color pegs as the hiddenColors have generated (both the color and at the same index in the array) */
+}
+/* 
+function updateResult() {
+    if (checkPlayerGuess()) {
+        displayResult.innerText = 'Congratulations, you won!';
+    } else if (playerAttempts >= maximumAttempts) {
+        displayResult.innerText = `Game over! The correct color pegs were ${hiddenColors.join(', ')}.`;
+    }
+} */
+
+function clearDisplay() {
+    for (let i = 0; i < squareElements.length; i++) {
+        squareElements[i].style.backgroundColor = 'white';
+    }
+    displayResult.innerText = '';
+}
+
+/*  For EACH player guess, check color and index = black & just color = white. How to update display only after guess?
+function feedbackPegs() {
+    if (playerGuess.every((color, index) => color === hiddenColors[index])) ;
+} */
+
 
 
 /*----------------------------- Event Listeners -----------------------------*/
 resetBtn.addEventListener('click', init);
 
 undoBtn.addEventListener('click', () => {
-    if (playerGuess.length > 0) {
+    if (checkPlayerGuess() || playerAttempts >= maximumAttempts) {
+    } else if (playerGuess.length > 0) {
         playerGuess.pop();
-        targetCell++;
+        const previousColumn = playerGuess.length;
+        const square = document.querySelector(`.row[data-row="${currentRow}"] .sqr[data-column="${previousColumn}"]`);
+        if (square) {
+            square.style.backgroundColor = 'white';
+        }
         updateDisplay();
     }
-});
+    });
 
 colorPegsBtn.forEach(button => {
     button.addEventListener('click', () => {
@@ -151,10 +151,8 @@ colorPegsBtn.forEach(button => {
 
 
 /*----------------------------- Calling the functions -----------------------------*/
-init();
-console.log(hiddenColors);
-/* render();
-updateResult();
+/* render(); */
+/* updateResult();
 colorReveal();
 checkPlayerGuess();
 updateDisplay(); */
