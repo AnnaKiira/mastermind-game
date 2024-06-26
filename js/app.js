@@ -12,7 +12,7 @@ let playerAttempts; /* this starts at 0 since player hasn't used any attempts wh
 let playerGuess; /* the array of the players guesses */
 let targetCell;
 let currentRow;
-/* let feedbackCell; */
+let feedbackSquare;
 
 
 /*------------------------ Cached Element References ------------------------*/
@@ -52,7 +52,7 @@ function init() {
     playerGuess = [];
     targetCell = 0;
     currentRow = 0;
-    /* feedbackCell = 5; */
+    feedbackSquare = 5;
     updateDisplay();
     console.log(hiddenColors);
 };
@@ -86,12 +86,16 @@ function updateDisplay() {
     if (playerGuess.length === 4) {
         if (checkPlayerGuess()) {
             displayResult.innerText = 'Congratulations, you won!';
+            feedbackPegs();
         } else if (playerAttempts >= maximumAttempts) {
             displayResult.innerText = `Game over! The correct color pegs were ${hiddenColors.join(', ')}.`;
+            feedbackPegs();
         } else {
+            feedbackPegs();
             playerAttempts++;
             currentRow++;
             playerGuess = [];
+            feedbackSquare = 5;
         }
     }
 }
@@ -115,12 +119,18 @@ function clearDisplay() {
     displayResult.innerText = '';
 }
 
-/*  For EACH player guess, check color and index = black & just color = white. How to update display only after guess?
+ /* For EACH player guess, check color and index = black & just color = white. How to update display only after guess? */
 function feedbackPegs() {
-    if (playerGuess.every((color, index) => color === hiddenColors[index])) ;
-} */
-
-
+    for (let i = 0; i < playerGuess.length; i++) {
+        if (playerGuess[i] === hiddenColors[i]) {
+            const feedbackCell = document.querySelector(`.row[data-row="${currentRow}"] .sqr[data-column="${feedbackSquare}"]`);
+            if (feedbackCell) {
+                feedbackCell.style.backgroundColor = 'black';
+                feedbackSquare++;
+            }
+        }
+    }
+}
 
 /*----------------------------- Event Listeners -----------------------------*/
 resetBtn.addEventListener('click', init);
@@ -151,8 +161,8 @@ colorPegsBtn.forEach(button => {
 
 
 /*----------------------------- Calling the functions -----------------------------*/
-/* render(); */
-/* updateResult();
+/* render();
+updateResult();
 colorReveal();
 checkPlayerGuess();
 updateDisplay(); */
