@@ -18,16 +18,16 @@ let loseAudio = new Audio('./audio/Game over.wav');
 
 
 /*------------------------ Cached Element References ------------------------*/
-const grid = document.querySelector('.grid')
+const grid = document.querySelector('.grid');
 /* console.log(grid) */
-const squareElements = [] //This will contain all of the divs representing squares on my display
-const displayResult = document.querySelector('#display-result')
+const squareElements = []; //This will contain all of the divs representing squares on my display
+const displayResult = document.querySelector('#display-result');
 /* console.log(displayResult) */
-const undoBtn = document.querySelector('#undo-button')
-const resetBtn = document.querySelector('#reset-button')
+const undoBtn = document.querySelector('#undo-button');
+const resetBtn = document.querySelector('#reset-button');
 /* console.log(undoBtn)
 console.log(resetBtn) */
-const colorPegsBtn = document.querySelectorAll('.color-peg')
+const colorPegsBtn = document.querySelectorAll('.color-peg');
 
 /*------------------------ Grid Creation ------------------------*/
 for (let i = rows -1; i >= 0; i--) {
@@ -48,14 +48,18 @@ for (let i = rows -1; i >= 0; i--) {
 
 /*-------------------------------- Functions --------------------------------*/
 function init() {
-    clearDisplay();
     hiddenColors = colorReveal();
     playerAttempts = 0;
     playerGuess = [];
     targetCell = 0;
     currentRow = 0;
     feedbackSquare = 5;
+    clearDisplay();
     updateDisplay();
+    const hiddenColorElements = document.querySelectorAll('.hidden-color');
+    hiddenColorElements.forEach(element => {
+        element.style.backgroundColor = 'white';
+    });
     console.log(hiddenColors);
 };
 
@@ -90,16 +94,27 @@ function updateDisplay() {
             displayResult.innerText = 'Congratulations, you won!';
             winAudio.play();
             feedbackPegs();
+            revealHiddenColors();
         } else if (playerAttempts >= maximumAttempts) {
             displayResult.innerText = `Game over! The correct color pegs were ${hiddenColors.join(', ')}.`;
             loseAudio.play();
             feedbackPegs();
+            revealHiddenColors();
         } else {
             feedbackPegs();
             playerAttempts++;
             currentRow++;
             playerGuess = [];
             feedbackSquare = 5;
+        }
+    }
+}
+
+function revealHiddenColors() {
+    for (let i = 0; i < hiddenColors.length; i++) {
+        const hiddenColorElements = document.getElementById(`hidden-color-${i+1}`);
+        if (hiddenColorElements) {
+            hiddenColorElements.style.backgroundColor = hiddenColors[i];
         }
     }
 }
@@ -131,26 +146,23 @@ function feedbackPegs() {
             if (feedbackCell) {
                 feedbackCell.style.backgroundColor = 'black';
                 feedbackSquare++;
-                if (playerGuess[i] !== hiddenColors[i] && hiddenColors.includes(playerGuess[i])) {
-                    let colorCheck = hiddenColors.findIndex((color, index) => color === playerGuess[i] && playerGuess[index] !== hiddenColors[index]);
-                    if (colorCheck !== -1) {
-                        const feedbackCell = document.querySelector(`.row[data-row="${currentRow}"] .sqr[data-column="${feedbackSquare}"]`);
-                        if (feedbackCell) {
-                            feedbackCell.style.backgroundColor = 'pink';
-                            feedbackSquare++;
-                        }
-
-                    }
-                }
+            }
+        }
+    }
+    for (let i = 0; i < playerGuess.length; i++) {
+        /* maybe reuse .every in checkPlayerGuess but remove index? 
+        however not sure how to not count colors twice for guesses with 2x of the same color
+        Also can't count the black pegs*/
+        if (hiddenColors.includes(playerGuess[i])) {
+            const feedbackCell = document.querySelector(`.row[data-row="${currentRow}"] .sqr[data-column="${feedbackSquare}"]`);
+            if (feedbackCell) {
+                feedbackCell.style.backgroundColor = 'pink';
+                feedbackSquare++;
             }
         }
     }
 }
 
-/* function playAudio() {
-    const audio = new Audio('Winner.wav');
-    audio.play();
-} */
 
 /*----------------------------- Event Listeners -----------------------------*/
 resetBtn.addEventListener('click', init);
@@ -187,3 +199,4 @@ colorReveal();
 checkPlayerGuess();
 updateDisplay(); */
 /* feedbackPegs(); */
+/* revealHiddenColors(); */
