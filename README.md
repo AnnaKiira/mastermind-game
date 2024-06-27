@@ -1,5 +1,5 @@
 # mastermind-game
-A screenshot of your app or a logo.
+![Image of game](./image/gameimage.png/?raw=true "Mastermind Game")
 
 Description of the game and why I chose it for my project:
 - Mastermind is a code-breaking game. The goal is for the player to guess a generated code of colored pegs. The player has eight attempts to do so. After each guess, feedback is provided:
@@ -9,6 +9,7 @@ peg will indicate the player guessed the correct color but in the wrong position
 - I chose Mastermind as my game project because I like the logical challenge of the game. Addiotionally, I was also interested in developing a single-player game, as our class primarily focused on multiplayer games like tic-tac-toe.   
 
 Getting started: Include a link to your deployed game and any instructions you deem important. This should also contain a link to your planning materials.
+[Planning Materials Document](https://docs.google.com/document/d/1cjcZTjijnJ6sMgfoG4z_IcGP5rwZv1Q7NydrabWlPio/edit?usp=sharing)
 
 Technologies used:
 For the completion of this project, JavaScript, HTML, CSS and Audio has been used.
