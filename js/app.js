@@ -140,30 +140,32 @@ function clearDisplay() {
 
  /* For EACH player guess, check color and index = black & just color = white. How to update display only after guess? */
 function feedbackPegs() {
+    let usedSquare = new Set();
     for (let i = 0; i < playerGuess.length; i++) {
         if (playerGuess[i] === hiddenColors[i]) {
             const feedbackCell = document.querySelector(`.row[data-row="${currentRow}"] .sqr[data-column="${feedbackSquare}"]`);
             if (feedbackCell) {
                 feedbackCell.style.backgroundColor = 'black';
                 feedbackSquare++;
+                usedSquare.add(i)
             }
         }
     }
     for (let i = 0; i < playerGuess.length; i++) {
-        /* maybe reuse .every in checkPlayerGuess but remove index? 
-        however not sure how to not count colors twice for guesses with 2x of the same color
-        Also can't count the black pegs*/
         if (hiddenColors.includes(playerGuess[i])) {
             const feedbackCell = document.querySelector(`.row[data-row="${currentRow}"] .sqr[data-column="${feedbackSquare}"]`);
             if (feedbackCell) {
                 feedbackCell.style.backgroundColor = 'pink';
                 feedbackSquare++;
+                break;
             }
         }
     }
 }
 
-
+/* maybe reuse .every in checkPlayerGuess but remove index? 
+        however not sure how to not count colors twice for guesses with 2x of the same color
+        Also can't count the black pegs*/
 /*----------------------------- Event Listeners -----------------------------*/
 resetBtn.addEventListener('click', init);
 
