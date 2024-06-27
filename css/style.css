@@ -1,21 +1,35 @@
+body {
+    max-width: 850px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    background-color:rgb(241, 231, 241);
+}
+
+.gameZone {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+}
+
 .grid-wrapper {
-    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background-color: pink; */
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .grid {
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
-    height: 530px;
+    height: 400px;
     width: 400px;
-    margin-top: -300px;
 }
 
 .grid > div > div {
     border: 1px solid lightgrey;
-    display: inline-block;
     width: calc(100% / 9);
 }
 
@@ -23,69 +37,94 @@
     display: flex;
     height: calc(100% / 8);
     color: transparent;
+}
 
+.gameElements {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 16px;
+    margin-top: 5%;
+}
+
+#display-result {
+    display: flex;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+}
+
+.hidden-colors {
+    display: flex;
 }
 
 .hidden-color {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    margin: 10px;
+    margin: 5px;
+    padding: 20px;
     border: 2px solid black;
-    display: inline-block;
     background-color: white;
 }
 
 .color-pegs {
-    border-radius: 50%;
-    margin-top: -300px;
+    display: flex;
+    gap: 10px;
+    padding-bottom: 16px;
+    
 }
 
 .color-peg[data-color="green"] {
     background-color: green;
+    border: 2px solid black;
     padding: 20px;
-    border-radius: 50%;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
 }
 
 .color-peg[data-color="red"] {
     background-color: red;
+    border: 2px solid black;
     padding: 20px;
-    border-radius: 50%;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
 }
 
 .color-peg[data-color="blue"] {
     background-color: blue;
+    border: 2px solid black;
     padding: 20px;
-    border-radius: 50%;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
 }
 
 .color-peg[data-color="brown"] {
     background-color: brown;
+    border: 2px solid black;
     padding: 20px;
-    border-radius: 50%;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
 }
 
 .color-peg[data-color="orange"] {
     background-color: orange;
+    border: 2px solid black;
     padding: 20px;
-    border-radius: 50%;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
 }
 
 .color-peg[data-color="yellow"] {
     background-color: yellow;
+    border: 2px solid black;
     padding: 20px;
-    border-radius: 50%;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
 }
 
-/* .color-peg[data-color="white"] {
-    background-color: white;
-    padding: 20px;
-} */
-
-/* .row[data-index="0"] {
-    
+.buttons {
+    display: flex;
+    gap: 16px;
+    padding-bottom: 24px;
 }
 
-.sqr[data-index="5"] {
-
-} */
+.playerGuide {
+    display: flex;
+    flex-direction: column;
+    line-height: 24px;
+    width: 90%;
+    margin-bottom: 24px;
+    text-align: justify;
+}
