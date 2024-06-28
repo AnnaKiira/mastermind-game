@@ -49,6 +49,7 @@ function init() {
     hiddenColorElements.forEach(element => {
         element.style.backgroundColor = 'white';
     });
+    console.log(hiddenColors);
 };
 
 init();
@@ -115,7 +116,7 @@ function clearDisplay() {
 function feedbackPegs() {
     let usedSquare = new Set();
     for (let i = 0; i < playerGuess.length; i++) {
-        if (playerGuess[i] === hiddenColors[i]) {
+        if (playerGuess[i] === hiddenColors[i]) { 
             const feedbackCell = document.querySelector(`.row[data-row="${currentRow}"] .sqr[data-column="${feedbackSquare}"]`);
             if (feedbackCell) {
                 feedbackCell.style.backgroundColor = 'black';
@@ -124,13 +125,12 @@ function feedbackPegs() {
             };
         };
     };
-    for (let i = 0; i < playerGuess.length; i++) {
-        if (hiddenColors.includes(playerGuess[i])) {
+    for (let i = 0; i < playerGuess.length; i++) { 
+        if (!usedSquare.has(i) && hiddenColors.includes(playerGuess[i])) {
             const feedbackCell = document.querySelector(`.row[data-row="${currentRow}"] .sqr[data-column="${feedbackSquare}"]`);
             if (feedbackCell) {
                 feedbackCell.style.backgroundColor = 'hotpink';
                 feedbackSquare++;
-                break;
             };
         };
     };
