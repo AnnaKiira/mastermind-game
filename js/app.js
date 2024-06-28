@@ -32,9 +32,9 @@ for (let i = rows -1; i >= 0; i--) {
         square.dataset.column = i
         squareElements.push(square)
         row.appendChild(square)
-    }
+    };
     grid.appendChild(row)
-}
+};
 
 function init() {
     hiddenColors = colorGenerator();
@@ -58,9 +58,9 @@ function colorGenerator() {
     for (let i = 0; i < 4; i++) {
         let randomColor = colorOptions[Math.floor(Math.random() * colorOptions.length)];
         hidden.push(randomColor); 
-    }
+    };
     return hidden;
-}
+};
 
 function updateDisplay() {
     for (let i = 0; i < playerGuess.length; i++) {
@@ -69,8 +69,8 @@ function updateDisplay() {
         const square = document.querySelector(`.row[data-row="${currentRow}"] .sqr[data-column="${currentColumn}"]`);
         if (square) {
             square.style.backgroundColor = color;
-        }
-    }
+        };
+    };
     if (playerGuess.length === 4) {
         if (checkPlayerGuess()) {
             displayResult.innerText = 'Congratulations, you won!';
@@ -88,29 +88,29 @@ function updateDisplay() {
             currentRow++;
             playerGuess = [];
             feedbackSquare = 5;
-        }
-    }
-}
+        };
+    };
+};
 
 function checkPlayerGuess() {
     return playerGuess.every((color, index) => color === hiddenColors[index]);
-}
+};
 
 function revealHiddenColors() {
     for (let i = 0; i < hiddenColors.length; i++) {
         const hiddenColorElements = document.getElementById(`hidden-color-${i+1}`);
         if (hiddenColorElements) {
             hiddenColorElements.style.backgroundColor = hiddenColors[i];
-        }
-    }
-}
+        };
+    };
+};
 
 function clearDisplay() {
     for (let i = 0; i < squareElements.length; i++) {
         squareElements[i].style.backgroundColor = 'white';
-    }
+    };
     displayResult.innerText = '';
-}
+};
 
 function feedbackPegs() {
     let usedSquare = new Set();
@@ -121,9 +121,9 @@ function feedbackPegs() {
                 feedbackCell.style.backgroundColor = 'black';
                 feedbackSquare++;
                 usedSquare.add(i)
-            }
-        }
-    }
+            };
+        };
+    };
     for (let i = 0; i < playerGuess.length; i++) {
         if (hiddenColors.includes(playerGuess[i])) {
             const feedbackCell = document.querySelector(`.row[data-row="${currentRow}"] .sqr[data-column="${feedbackSquare}"]`);
@@ -131,10 +131,10 @@ function feedbackPegs() {
                 feedbackCell.style.backgroundColor = 'hotpink';
                 feedbackSquare++;
                 break;
-            }
-        }
-    }
-}
+            };
+        };
+    };
+};
 
 resetBtn.addEventListener('click', init);
 
@@ -146,9 +146,9 @@ undoBtn.addEventListener('click', () => {
         const square = document.querySelector(`.row[data-row="${currentRow}"] .sqr[data-column="${previousColumn}"]`);
         if (square) {
             square.style.backgroundColor = 'white';
-        }
+        };
         updateDisplay();
-    }
+    };
     });
 
 colorPegsBtn.forEach(button => {
@@ -157,6 +157,6 @@ colorPegsBtn.forEach(button => {
         if (playerGuess.length < 4) {
             playerGuess.push(color);
             updateDisplay();
-        }
+        };
     });
 });
