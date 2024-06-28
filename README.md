@@ -8,8 +8,8 @@ peg will indicate the player guessed the correct color but in the wrong position
 
 - I chose Mastermind as my game project because I like the logical challenge of the game. Addiotionally, I was also interested in developing a single-player game, as our class primarily focused on multiplayer games like tic-tac-toe.   
 
-[Link to Game](https://annakiira.github.io/mastermind-game/)
-[Planning Materials Document](https://docs.google.com/document/d/1cjcZTjijnJ6sMgfoG4z_IcGP5rwZv1Q7NydrabWlPio/edit?usp=sharing)
+- [Link to Game](https://annakiira.github.io/mastermind-game/)
+- [Planning Materials Document](https://docs.google.com/document/d/1cjcZTjijnJ6sMgfoG4z_IcGP5rwZv1Q7NydrabWlPio/edit?usp=sharing)
 
 Technologies used:
 - For the completion of this project, JavaScript, HTML, CSS and Audio has been used.
