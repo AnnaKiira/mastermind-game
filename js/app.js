@@ -120,7 +120,7 @@ function feedbackPegs() {
             if (feedbackCell) {
                 feedbackCell.style.backgroundColor = 'black';
                 feedbackSquare++;
-                usedSquare.add(i);
+                usedSquare.add(i)
             }
         }
     }
