@@ -49,7 +49,6 @@ function init() {
     hiddenColorElements.forEach(element => {
         element.style.backgroundColor = 'white';
     });
-    console.log(hiddenColors);
 };
 
 init();
