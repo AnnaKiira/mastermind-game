@@ -12,7 +12,7 @@ peg will indicate the player guessed the correct color but in the wrong position
 - [Planning Materials Document](https://docs.google.com/document/d/1cjcZTjijnJ6sMgfoG4z_IcGP5rwZv1Q7NydrabWlPio/edit?usp=sharing)
 
 Technologies used:
-- For the completion of this project, JavaScript, HTML, CSS and Audio has been used.
+- For the completion of this project, JavaScript, HTML, CSS and Audio have been used.
 
 Future enhancements: 
 Future enhancements for this Mastermind project include:
